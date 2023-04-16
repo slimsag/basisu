@@ -23,12 +23,15 @@ pub fn build(b: *std.Build) !void {
     lib.defineCMacro("BASISU_FORCE_DEVEL_MESSAGES", "0");
     lib.defineCMacro("BASISU_SUPPORT_KTX2_ZSTD", "0");
 
+    lib.addIncludePath("encoder");
+    lib.addIncludePath("transcoder");
+
     if (build_encoder) {
         lib.addCSourceFiles(&encoder_sources, &.{});
         lib.installHeadersDirectoryOptions(.{
             .source_dir = "encoder",
             .install_dir = .header,
-            .install_subdir = ".",
+            .install_subdir = "encoder",
             .exclude_extensions = &.{ "inc", "cpp" },
         });
     }
@@ -42,7 +45,7 @@ pub fn build(b: *std.Build) !void {
         lib.installHeadersDirectoryOptions(.{
             .source_dir = "transcoder",
             .install_dir = .header,
-            .install_subdir = ".",
+            .install_subdir = "transcoder",
             .exclude_extensions = &.{ "inc", "cpp" },
         });
     }
