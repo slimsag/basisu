@@ -25,6 +25,12 @@ pub fn build(b: *std.Build) !void {
 
     if (build_encoder) {
         lib.addCSourceFiles(&encoder_sources, &.{});
+        lib.installHeadersDirectoryOptions(.{
+            .source_dir = "encoder",
+            .install_dir = .header,
+            .install_subdir = ".",
+            .exclude_extensions = &.{ "inc", "cpp" },
+        });
     }
 
     if (build_transcoder) {
@@ -32,6 +38,12 @@ pub fn build(b: *std.Build) !void {
             "-Wno-deprecated-builtins",
             "-Wno-deprecated-declarations",
             "-Wno-array-bounds",
+        });
+        lib.installHeadersDirectoryOptions(.{
+            .source_dir = "transcoder",
+            .install_dir = .header,
+            .install_subdir = ".",
+            .exclude_extensions = &.{ "inc", "cpp" },
         });
     }
 
