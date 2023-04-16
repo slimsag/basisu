@@ -26,6 +26,8 @@ pub fn build(b: *std.Build) !void {
     lib.addIncludePath("encoder");
     lib.addIncludePath("transcoder");
 
+    lib.addCSourceFile("zstd/zstd.c", &.{});
+
     if (build_encoder) {
         lib.addCSourceFiles(&encoder_sources, &.{});
         lib.installHeadersDirectoryOptions(.{
