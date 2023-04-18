@@ -52,7 +52,7 @@ pub fn build(b: *std.Build) !void {
         });
     }
 
-    lib.install();
+    b.installArtifact(lib);
 }
 
 const encoder_sources = [_][]const u8{
