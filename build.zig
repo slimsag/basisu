@@ -31,7 +31,7 @@ pub fn build(b: *std.Build) !void {
     if (build_encoder) {
         lib.addCSourceFiles(&encoder_sources, &.{});
         lib.installHeadersDirectoryOptions(.{
-            .source_dir = "encoder",
+            .source_dir = .{ .path = "encoder" },
             .install_dir = .header,
             .install_subdir = "encoder",
             .exclude_extensions = &.{ "inc", "cpp" },
@@ -45,7 +45,7 @@ pub fn build(b: *std.Build) !void {
             "-Wno-array-bounds",
         });
         lib.installHeadersDirectoryOptions(.{
-            .source_dir = "transcoder",
+            .source_dir = .{ .path = "transcoder" },
             .install_dir = .header,
             .install_subdir = "transcoder",
             .exclude_extensions = &.{ "inc", "cpp" },
