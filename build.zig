@@ -23,10 +23,10 @@ pub fn build(b: *std.Build) !void {
     lib.defineCMacro("BASISU_FORCE_DEVEL_MESSAGES", "0");
     lib.defineCMacro("BASISU_SUPPORT_KTX2_ZSTD", "0");
 
-    lib.addIncludePath("encoder");
-    lib.addIncludePath("transcoder");
+    lib.addIncludePath(.{ .path = "encoder" });
+    lib.addIncludePath(.{ .path = "transcoder" });
 
-    lib.addCSourceFile("zstd/zstd.c", &.{});
+    lib.addCSourceFile(.{ .file = .{ .path = "zstd/zstd.c" }, .flags = &.{} });
 
     if (build_encoder) {
         lib.addCSourceFiles(&encoder_sources, &.{});
