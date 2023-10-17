@@ -29,7 +29,7 @@ pub fn build(b: *std.Build) !void {
     lib.addCSourceFile(.{ .file = .{ .path = "zstd/zstd.c" }, .flags = &.{} });
 
     if (build_encoder) {
-        lib.addCSourceFiles(&encoder_sources, &.{});
+        lib.addCSourceFiles(.{ .files = &encoder_sources, .flags = &.{} });
         lib.installHeadersDirectoryOptions(.{
             .source_dir = .{ .path = "encoder" },
             .install_dir = .header,
@@ -39,11 +39,11 @@ pub fn build(b: *std.Build) !void {
     }
 
     if (build_transcoder) {
-        lib.addCSourceFiles(&transcoder_sources, &.{
+        lib.addCSourceFiles(.{ .files = &transcoder_sources, .flags = &.{
             "-Wno-deprecated-builtins",
             "-Wno-deprecated-declarations",
             "-Wno-array-bounds",
-        });
+        } });
         lib.installHeadersDirectoryOptions(.{
             .source_dir = .{ .path = "transcoder" },
             .install_dir = .header,
