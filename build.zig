@@ -43,6 +43,7 @@ pub fn build(b: *std.Build) !void {
             "-Wno-deprecated-builtins",
             "-Wno-deprecated-declarations",
             "-Wno-array-bounds",
+            "-fno-strict-aliasing",
         } });
         lib.installHeadersDirectoryOptions(.{
             .source_dir = .{ .path = "transcoder" },
