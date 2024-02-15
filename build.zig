@@ -39,12 +39,16 @@ pub fn build(b: *std.Build) !void {
     }
 
     if (build_transcoder) {
-        lib.addCSourceFiles(.{ .files = &transcoder_sources, .flags = &.{
-            "-Wno-deprecated-builtins",
-            "-Wno-deprecated-declarations",
-            "-Wno-array-bounds",
-            "-fno-strict-aliasing",
-        } });
+        lib.addCSourceFiles(.{
+            .files = &transcoder_sources,
+            .flags = &.{
+                "-Wno-deprecated-builtins",
+                "-Wno-deprecated-declarations",
+                "-Wno-array-bounds",
+                "-fno-strict-aliasing",
+                "-fno-sanitize=undefined", // there is some UB in transcoder
+            },
+        });
         lib.installHeadersDirectoryOptions(.{
             .source_dir = .{ .path = "transcoder" },
             .install_dir = .header,
